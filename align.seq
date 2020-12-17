@@ -4,4 +4,11 @@ Final project #8: Implement EMA's barcode correction algorithm
 align.seq
 """
 
-print("hello")
+
+def normalize_cloud_probabilities():
+
+def seek_next_barcode_group():
+
+def find_clouds_and_align():
+
+#find_clouds_and_align()
