@@ -1,0 +1,76 @@
+#SEQ File takes in FASTQ file as input and counts and corrects the barcode for EMA
+
+from sys import argv
+
+input = str(argv[1])
+test = list[str]()
+barcodes = dict[str, int]()
+buckets = 500
+
+def neighbors(kmer):
+	for i in range(len(kmer)):
+		for b in (k'A', k'C', k'G', k'T'):
+			if kmer[i] != b:
+				yield kmer |> base(i, b)
+
+
+#Correction
+def process2(rec):
+	s = (rec[:16])
+	xK = Kmer[16](seq(s))
+	x = (list(neighbors(xK)))	
+	max = 0
+	maxkey = "h"
+	for each in x:
+		e = str(each)
+		if e in barcodes:
+			if barcodes[e] > max:
+				max = barcodes[e]
+				maxkey = e
+	
+	#if max >0:
+	#	barcodes[maxkey] = max+1
+	#qual = rec.qual
+	#s = 0.0
+	#for q in qual:
+	#	s+= ord(q) -33
+	#print(s/len(qual))
+	
+	
+#Counting
+
+def process(rec: FASTQRecord):
+	s = str(rec.seq[:16])
+	if s in barcodes:
+		barcodes[s] +=1
+	else:
+		test.append(s)
+			
+print("Reading Library Barcodes.....")
+f = open("barcode.txt", "r")
+#f1 = f.readlines()
+for each in f:
+	barcodes[str(each)] = 0
+
+f.close()
+print("Reading paired-end reads and checking counts.....")
+for r in FASTQ(input):
+	process(r)
+
+for each in test:
+	process2(each)
+	
+	
+#print(barcodes["TTAGTTCCATCGGTTA"])
+#x = ("TTAGTTCCATCGGTAT")
+#y = ("TTAGTTCCATCGGTTT")
+
+#xK = Kmer[16](seq(x))
+#yK = Kmer[16](seq(y))
+#print abs(xK-yK)
+
+
+
+
+
+
