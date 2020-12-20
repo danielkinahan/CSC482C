@@ -1,11 +1,65 @@
-#SEQ File takes in FASTQ file as input and counts and corrects the barcode for EMA
+#Final File with clean functions and new implementation
 
 from sys import argv
+from sys import exit
+from time import timing
+
+if len(argv) != 3:
+	print("Error! - Usage: seqc -d ema.seq reads.fq whitelist.txt")
+	exit(1)
 
 input = str(argv[1])
-test = list[str]()
-barcodes = dict[str, int]()
+whitelist_file = str(argv[2])
 buckets = 500
+
+
+#Dictionaries used throughout
+whitelist = dict[str, int]() #Barcode library
+rec_link = dict[FASTQRecord, str]()
+count_list = dict[str, int]()
+w_map = dict[str, int]()
+w_sort = dict[str, int]()
+final_link =  dict[str, str]()
+
+
+
+#Lists
+all_recs = list[FASTQRecord]()
+exempt_recs = list[FASTQRecord]()
+recs_use = list[FASTQRecord]()
+total_recs = list[str]()
+bucket_final = list[list[str]]()
+
+
+def compare_quality(rec, barcode1, barcode2):
+	seq1_score = 0.0
+	seq2_score = 0.0
+	counter = 0
+	for each in rec:
+		if counter <2:
+			s = str(each.seq[:16])
+			score = each.qual[:16]
+			sum = 0.0
+			if s == barcode1:
+				counter+=1
+				for j in score:
+					sum+= ord(j) - 33
+				seq1_score = sum / len(score)
+			elif s == barcode2:
+				counter+=1
+				for j in score:
+					sum+= ord(j) - 33
+				seq2_score = sum/len(score)
+		else:
+			break
+
+	if seq1_score >= seq2_score:
+		return barcode1
+	else:
+		return barcode2
+	
+
+
 
 def neighbors(kmer):
 	for i in range(len(kmer)):
@@ -15,62 +69,190 @@ def neighbors(kmer):
 
 
 #Correction
-def process2(rec):
-	s = (rec[:16])
+def correction(rec):
+	rec_string = str(rec.seq)
+	s = (rec_string[:16])
 	xK = Kmer[16](seq(s))
-	x = (list(neighbors(xK)))	
-	max = 0
+	x = (list(neighbors(xK)))
+	max = -1
 	maxkey = "h"
+	
+	
+
+	#Have to change if e in final to check if e is in barcode
 	for each in x:
 		e = str(each)
-		if e in barcodes:
-			if barcodes[e] > max:
-				max = barcodes[e]
-				maxkey = e
-	
-	#if max >0:
-	#	barcodes[maxkey] = max+1
-	#qual = rec.qual
-	#s = 0.0
-	#for q in qual:
-	#	s+= ord(q) -33
-	#print(s/len(qual))
-	
-	
-#Counting
-
-def process(rec: FASTQRecord):
-	s = str(rec.seq[:16])
-	if s in barcodes:
-		barcodes[s] +=1
-	else:
-		test.append(s)
+		if e in count_list:
 			
-print("Reading Library Barcodes.....")
-f = open("barcode.txt", "r")
-#f1 = f.readlines()
-for each in f:
-	barcodes[str(each)] = 0
+			#Place for quality score using whitelist and quality score
+			if count_list[e] >= max:
+				t = compare_quality(all_recs, e, maxkey)
+				
+				newmax = count_list[t]
+				max = count_list[t]
+				
+				maxkey = t
+		
+		elif e in whitelist:
+			if max < 0:
+				max = 0
+				maxkey = e
+				
+				
+			
+				
+	if max>=0:
+		count_list[maxkey] = max + 1
+		total_recs.append(maxkey)
+		recs_use.append(rec)
+		rec_link[rec] = maxkey
 
-f.close()
-print("Reading paired-end reads and checking counts.....")
-for r in FASTQ(input):
-	process(r)
 
-for each in test:
-	process2(each)
+#Counting
+def count(rec):
+	s = str(rec.seq[:16])
+	all_recs.append(rec)
+
+	if s in whitelist:
+		if s in count_list:
+			count_list[s] +=1
+			total_recs.append(s)
+			recs_use.append(rec)
+			rec_link[rec] = s
+			
+		else:
+			count_list[s] = 1	
+			total_recs.append(s)
+			recs_use.append(rec)
+			rec_link[rec] = s
+		
+	else:
+		exempt_recs.append(rec)
+
+
+with timing('Program total runtime:'):
+
+	print("Reading Library Barcodes...")
+	with timing("Reading Library Barcodes"):
+		f = open(whitelist_file, "r")
+		for each in f:
+			whitelist[str(each)] = 0
+		f.close()
+
+	print("Reading paired-end reads and checking counts.....")
+	with timing("Reading paired-end reads and checking counts"):
+		for r in FASTQ(input):
+			count(r)
+
+	print("Correction...")
+	with timing("Correction"):
+		for each in exempt_recs:
+			correction(each)
+
+		for each in rec_link:
+			id = int(str(each.name).split(':')[6])
+			bar = rec_link[each]
+			if bar in w_map:
+				if id < w_map[bar]:
+					w_map[bar] = id
+			else:
+				w_map[bar] = id
+
+	print("Sorting...")
+	with timing("Sorting"):
+		#distribution = int(len(total_recs)/len(final))
+		rec_bucket = int(len(total_recs)/buckets)
+
+		buck = rec_bucket
+
+		#Sorts each barcode into a bucket based of the count
+		placehold = list[str]()
+		while(rec_bucket !=0):
+			sum = 0
+			for each in count_list:
+				count = count_list[each]
+				sum+=count
+				if each in w_map:
+					w_sort[each] = w_map[each]
+				#Force rest to fill into last bucket
+				if len(bucket_final) == 499:
+					rec_bucket += sum
+					if rec_bucket >= len(total_recs):
+						c = sorted([x[::-1] for x in w_sort.items()])
+						for each in c:
+							placehold.append(each[1])
+						bucket_final.append(placehold)
+						rec_bucket = 0
+						break
+					
+				else:
+					if sum >= buck:
+						
+						rec_bucket += sum
+						if rec_bucket >= len(total_recs):
+							rec_bucket = 0
+							break
+						sum = 0
+						c = sorted([x[::-1] for x in w_sort.items()])
+						for each in c:
+							placehold.append(each[1])
+						bucket_final.append(placehold)
+						placehold = list[str]()
+						w_sort = dict[str, int]()
+
+		#Linking the record to the update barcode	
+		for each in rec_link:
+			s = str(each.seq[:16])
+			s2 = rec_link[each]
+			final_link[str(each.seq)] = s2 
 	
-	
-#print(barcodes["TTAGTTCCATCGGTTA"])
-#x = ("TTAGTTCCATCGGTAT")
-#y = ("TTAGTTCCATCGGTTT")
+	print("Sorting Buckets by Read from Barcode...")
+	with timing("Sorting Buckets by Read from Barcode"):
+		#print("This takes a VERY long time")
 
-#xK = Kmer[16](seq(x))
-#yK = Kmer[16](seq(y))
-#print abs(xK-yK)
-
-
-
+		#Creating a list that will be used to extract the barcode for each record
+		t = list[str]()
+		for each in recs_use:
+			s = final_link[str(each.seq)]
+			t.append(s)
 
 
+		for i in range(len(bucket_final)):
+			#print("Creating Bucket: [" + str(i) + "]")
+			out = "output/bin_" + str(i)
+			with open(out, 'w') as fo:
+				if i == 100:
+					print("100 Buckets..")
+				elif i == 200:
+					print("200 Buckets..")
+				elif i == 300:
+					print("300 Buckets..")
+				elif i == 400:
+					print("400 Buckets..")
+				elif i == 500:
+					print("500 Buckets..")
+					
+				for each in bucket_final[i]:
+					c = count_list[each]
+					fo.write("Barcode: ")
+					fo.write(each)
+					fo.write(" Reads: ")
 
+
+					#Tried to parallelize this but didn't have enough time
+					#Instead of using a for loop why not create a dictioary of the barcodes that map to the record. Future work
+					for count, r in enumerate(recs_use):
+						if c>0:
+							s = t[count]
+							if each == s:
+								posts = str(r.seq[16:])
+								postqual = str(r.qual[16:])
+								c-=1
+								id = str(r.name)
+								fo.write(id + "  " + posts + "  " + postqual + "  ")
+							
+
+							
+						else:
+							break
+					fo.write("\n")

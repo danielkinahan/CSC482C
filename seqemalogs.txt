@@ -1,0 +1,26 @@
+==> seqema1.log <==
+Reading Library Barcodes took 3.13436s
+Reading paired-end reads and checking counts took 0.315506s
+Correction took 3.97696s
+Sorting took 0.136165s
+Sorting Buckets by Read from Barcode took 54.1719s
+Program total runtime: took 61.735s
+
+
+==> seqema2.log <==
+Reading Library Barcodes took 3.19062s
+Reading paired-end reads and checking counts took 0.322636s
+Correction took 3.90455s
+Sorting took 0.133581s
+Sorting Buckets by Read from Barcode took 53.8962s
+Program total runtime: took 61.4477s
+
+
+==> seqema3.log <==
+Reading Library Barcodes took 3.16174s
+Reading paired-end reads and checking counts took 0.30216s
+Correction took 3.94787s
+Sorting took 0.136281s
+Sorting Buckets by Read from Barcode took 56.0549s
+Program total runtime: took 63.6031s
+

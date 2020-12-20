@@ -1,0 +1,197 @@
+==> ematests/pre1.log <==
+:: Bucketing 1 inputs into 500 files with 40 threads
+:: Loading known counts file smalltest.fq.ema-ncnt ... 
+:: Loading known counts ... done in 2.8 s
+:: Loading full counts file smalltest.fq.ema-fcnt ... 
+::: Loading dump 1 of size 46,550 (2 MB) done in 0.003 s
+  :: Thread 1 from 1,164 to 2,328 took 0.001 s
+  :: Thread 3 from 3,492 to 4,656 took 0.002 s
+  :: Thread 8 from 9,312 to 10,476 took 0.002 s
+  :: Thread 4 from 4,656 to 5,820 took 0.002 s
+  :: Thread 7 from 8,148 to 9,312 took 0.002 s
+  :: Thread 2 from 2,328 to 3,492 took 0.003 s
+  :: Thread 16 from 18,624 to 19,788 took 0.002 s
+  :: Thread 33 from 38,412 to 39,576 took 0.001 s
+  :: Thread 9 from 10,476 to 11,640 took 0.003 s
+  :: Thread 10 from 11,640 to 12,804 took 0.002 s
+  :: Thread 18 from 20,952 to 22,116 took 0.002 s
+  :: Thread 6 from 6,984 to 8,148 took 0.005 s
+  :: Thread 0 from 0 to 1,164 took 0.005 s
+  :: Thread 26 from 30,264 to 31,428 took 0.001 s
+  :: Thread 29 from 33,756 to 34,920 took 0.003 s
+  :: Thread 5 from 5,820 to 6,984 took 0.005 s
+  :: Thread 11 from 12,804 to 13,968 took 0.003 s
+  :: Thread 24 from 27,936 to 29,100 took 0.004 s
+  :: Thread 39 from 45,396 to 46,550 took 0.003 s
+  :: Thread 38 from 44,232 to 45,396 took 0.003 s
+  :: Thread 14 from 16,296 to 17,460 took 0.004 s
+  :: Thread 37 from 43,068 to 44,232 took 0.004 s
+  :: Thread 32 from 37,248 to 38,412 took 0.004 s
+  :: Thread 30 from 34,920 to 36,084 took 0.004 s
+  :: Thread 31 from 36,084 to 37,248 took 0.006 s
+  :: Thread 17 from 19,788 to 20,952 took 0.006 s
+  :: Thread 28 from 32,592 to 33,756 took 0.003 s
+  :: Thread 27 from 31,428 to 32,592 took 0.003 s
+  :: Thread 13 from 15,132 to 16,296 took 0.004 s
+  :: Thread 12 from 13,968 to 15,132 took 0.004 s
+  :: Thread 35 from 40,740 to 41,904 took 0.004 s
+  :: Thread 21 from 24,444 to 25,608 took 0.004 s
+  :: Thread 22 from 25,608 to 26,772 took 0.004 s
+  :: Thread 15 from 17,460 to 18,624 took 0.005 s
+  :: Thread 36 from 41,904 to 43,068 took 0.005 s
+  :: Thread 25 from 29,100 to 30,264 took 0.005 s
+  :: Thread 23 from 26,772 to 27,936 took 0.004 s
+  :: Thread 34 from 39,576 to 40,740 took 0.004 s
+  :: Thread 20 from 23,280 to 24,444 took 0.006 s
+  :: Thread 19 from 22,116 to 23,280 took 0.006 s
+::: Correcting done in 0.01 s
+:: Stats: no change: 46,957 
+         no barcode: 2,588 
+       H1-corrected: 455 
+       H2-corrected: 0 
+:: Corrected map size: 441 (~ 0 MB)
+:: Correcting barcodes ... done in 0.0 s
+:: File assignment ... done in 0.5 s
+:: [==================================================] 50,000 out of 50,000 (100.00%)
+Writing barcodes ... done in 0.1 s
+
+==> ematests/pre2.log <==
+:: Bucketing 1 inputs into 500 files with 40 threads
+:: Loading known counts file smalltest.fq.ema-ncnt ... 
+:: Loading known counts ... done in 2.8 s
+:: Loading full counts file smalltest.fq.ema-fcnt ... 
+::: Loading dump 1 of size 46,550 (2 MB) done in 0.004 s
+  :: Thread 12 from 13,968 to 15,132 took 0.001 s
+  :: Thread 3 from 3,492 to 4,656 took 0.002 s
+  :: Thread 1 from 1,164 to 2,328 took 0.002 s
+  :: Thread 2 from 2,328 to 3,492 took 0.002 s
+  :: Thread 5 from 5,820 to 6,984 took 0.002 s
+  :: Thread 7 from 8,148 to 9,312 took 0.003 s
+  :: Thread 4 from 4,656 to 5,820 took 0.003 s
+  :: Thread 6 from 6,984 to 8,148 took 0.003 s
+  :: Thread 14 from 16,296 to 17,460 took 0.003 s
+  :: Thread 9 from 10,476 to 11,640 took 0.004 s
+  :: Thread 18 from 20,952 to 22,116 took 0.002 s
+  :: Thread 32 from 37,248 to 38,412 took 0.001 s
+  :: Thread 34 from 39,576 to 40,740 took 0.003 s
+  :: Thread 21 from 24,444 to 25,608 took 0.004 s
+  :: Thread 8 from 9,312 to 10,476 took 0.004 s
+  :: Thread 22 from 25,608 to 26,772 took 0.004 s
+  :: Thread 20 from 23,280 to 24,444 took 0.003 s
+  :: Thread 17 from 19,788 to 20,952 took 0.004 s
+  :: Thread 38 from 44,232 to 45,396 took 0.003 s
+  :: Thread 35 from 40,740 to 41,904 took 0.003 s
+  :: Thread 31 from 36,084 to 37,248 took 0.004 s
+  :: Thread 28 from 32,592 to 33,756 took 0.003 s
+  :: Thread 15 from 17,460 to 18,624 took 0.005 s
+  :: Thread 25 from 29,100 to 30,264 took 0.003 s
+  :: Thread 16 from 18,624 to 19,788 took 0.005 s
+  :: Thread 23 from 26,772 to 27,936 took 0.004 s
+  :: Thread 39 from 45,396 to 46,550 took 0.003 s
+  :: Thread 37 from 43,068 to 44,232 took 0.005 s
+  :: Thread 36 from 41,904 to 43,068 took 0.005 s
+  :: Thread 29 from 33,756 to 34,920 took 0.004 s
+  :: Thread 27 from 31,428 to 32,592 took 0.003 s
+  :: Thread 33 from 38,412 to 39,576 took 0.004 s
+  :: Thread 13 from 15,132 to 16,296 took 0.006 s
+  :: Thread 30 from 34,920 to 36,084 took 0.004 s
+  :: Thread 0 from 0 to 1,164 took 0.009 s
+  :: Thread 10 from 11,640 to 12,804 took 0.007 s
+  :: Thread 24 from 27,936 to 29,100 took 0.007 s
+  :: Thread 26 from 30,264 to 31,428 took 0.004 s
+  :: Thread 19 from 22,116 to 23,280 took 0.004 s
+  :: Thread 11 from 12,804 to 13,968 took 0.005 s
+::: Correcting done in 0.01 s
+:: Stats: no change: 46,957 
+         no barcode: 2,588 
+       H1-corrected: 455 
+       H2-corrected: 0 
+:: Corrected map size: 441 (~ 0 MB)
+:: Correcting barcodes ... done in 0.0 s
+:: File assignment ... done in 0.5 s
+:: [==================================================] 50,000 out of 50,000 (100.00%)
+Writing barcodes ... done in 0.6 s
+
+==> ematests/pre3.log <==
+:: Bucketing 1 inputs into 500 files with 40 threads
+:: Loading known counts file smalltest.fq.ema-ncnt ... 
+:: Loading known counts ... done in 2.8 s
+:: Loading full counts file smalltest.fq.ema-fcnt ... 
+::: Loading dump 1 of size 46,550 (2 MB) done in 0.003 s
+  :: Thread 1 from 1,164 to 2,328 took 0.002 s
+  :: Thread 3 from 3,492 to 4,656 took 0.002 s
+  :: Thread 4 from 4,656 to 5,820 took 0.002 s
+  :: Thread 2 from 2,328 to 3,492 took 0.002 s
+  :: Thread 5 from 5,820 to 6,984 took 0.002 s
+  :: Thread 22 from 25,608 to 26,772 took 0.001 s
+  :: Thread 17 from 19,788 to 20,952 took 0.002 s
+  :: Thread 6 from 6,984 to 8,148 took 0.004 s
+  :: Thread 9 from 10,476 to 11,640 took 0.004 s
+  :: Thread 7 from 8,148 to 9,312 took 0.004 s
+  :: Thread 16 from 18,624 to 19,788 took 0.004 s
+  :: Thread 29 from 33,756 to 34,920 took 0.001 s
+  :: Thread 15 from 17,460 to 18,624 took 0.003 s
+  :: Thread 23 from 26,772 to 27,936 took 0.001 s
+  :: Thread 20 from 23,280 to 24,444 took 0.001 s
+  :: Thread 12 from 13,968 to 15,132 took 0.004 s
+  :: Thread 8 from 9,312 to 10,476 took 0.004 s
+  :: Thread 27 from 31,428 to 32,592 took 0.004 s
+  :: Thread 19 from 22,116 to 23,280 took 0.004 s
+  :: Thread 35 from 40,740 to 41,904 took 0.004 s
+  :: Thread 28 from 32,592 to 33,756 took 0.003 s
+  :: Thread 10 from 11,640 to 12,804 took 0.005 s
+  :: Thread 34 from 39,576 to 40,740 took 0.005 s
+  :: Thread 14 from 16,296 to 17,460 took 0.005 s
+  :: Thread 39 from 45,396 to 46,550 took 0.004 s
+  :: Thread 0 from 0 to 1,164 took 0.008 s
+  :: Thread 26 from 30,264 to 31,428 took 0.004 s
+  :: Thread 18 from 20,952 to 22,116 took 0.006 s
+  :: Thread 38 from 44,232 to 45,396 took 0.004 s
+  :: Thread 37 from 43,068 to 44,232 took 0.005 s
+  :: Thread 31 from 36,084 to 37,248 took 0.005 s
+  :: Thread 36 from 41,904 to 43,068 took 0.005 s
+  :: Thread 33 from 38,412 to 39,576 took 0.008 s
+  :: Thread 25 from 29,100 to 30,264 took 0.005 s
+  :: Thread 11 from 12,804 to 13,968 took 0.005 s
+  :: Thread 13 from 15,132 to 16,296 took 0.008 s
+  :: Thread 21 from 24,444 to 25,608 took 0.006 s
+  :: Thread 30 from 34,920 to 36,084 took 0.004 s
+  :: Thread 24 from 27,936 to 29,100 took 0.005 s
+  :: Thread 32 from 37,248 to 38,412 took 0.004 s
+::: Correcting done in 0.011 s
+:: Stats: no change: 46,957 
+         no barcode: 2,588 
+       H1-corrected: 455 
+       H2-corrected: 0 
+:: Corrected map size: 441 (~ 0 MB)
+:: Correcting barcodes ... done in 0.0 s
+:: File assignment ... done in 0.5 s
+:: [==================================================] 50,000 out of 50,000 (100.00%)
+Writing barcodes ... done in 0.5 s
+
+==> ematests/sm1.log <==
+:: Loading 10X took 1.9 s
+:: Counting took 0.1 s
+:: Reads with OK barcode: 46,957 out of 50,000
+:: Ignored 0 reads
+:: Dumped block 1
+:: Printing took 0.7 s
+:: Processed 50,000 reads (33 MB uncompressed) in 2 s
+
+==> ematests/sm2.log <==
+:: Loading 10X took 1.9 s
+:: Counting took 0.1 s
+:: Reads with OK barcode: 46,957 out of 50,000
+:: Ignored 0 reads
+:: Dumped block 1
+:: Printing took 0.7 s
+:: Processed 50,000 reads (33 MB uncompressed) in 2 s
+
+==> ematests/sm3.log <==
+:: Loading 10X took 1.9 s
+:: Counting took 0.1 s
+:: Reads with OK barcode: 46,957 out of 50,000
+:: Ignored 0 reads
+:: Dumped block 1
+:: Printing took 0.7 s
+:: Processed 50,000 reads (33 MB uncompressed) in 2 s
