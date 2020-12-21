@@ -126,8 +126,7 @@ def count(rec):
 			recs_use.append(rec)
 			rec_link[rec] = s
 		
-	else:
-		exempt_recs.append(rec)
+	exempt_recs.append(rec)
 
 
 with timing('Program total runtime:'):
